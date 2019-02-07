@@ -1,4 +1,56 @@
 <!DOCTYPE html>
 <script>
-    
+    let playerScore = 0;
+    let compScore = 0;
+    let computerSelection;
+    let playerSelection;
+
+    function computerPlay() {
+       let roll = Math.floor(Math.random() * 3);
+       let choice;
+       if (roll == 1) {
+           choice = "Rock";
+       } else if (roll == 2){
+           choice = "Paper";
+       }
+       else {
+           choice = "Scissors";
+       }
+       return choice;
+    }
+
+
+    function playRound(playerSelection, computerSelection) {
+        playerSelection = prompt("Rock, Paper or Scissors? (Type score to see scores)").toLowerCase();
+        computerSelection = computerPlay();
+        if (playerSelection == "rock" && computerSelection == "Scissors" || playerSelection == "scissors" && computerSelection == "Paper" || playerSelection == "paper" && computerSelection == "Rock" )  {
+            console.log("You Win! " + playerSelection + " beats " + computerSelection);
+            playerScore++;
+        } else if (computerSelection == "Rock" && playerSelection == "scissors" || computerSelection == "Paper" && playerSelection == "rock" || computerSelection == "Scissors" && playerSelection == "paper") {
+            console.log("You lose! " + computerSelection + " beats " + playerSelection)
+            compScore++;
+        } else if (playerSelection == "rock" && computerSelection == "Rock" || playerSelection == "paper" && computerSelection == "Paper" || playerSelection == "scissors" && computerSelection == "Scissors"){
+            console.log("It's a Tie. " + computerSelection + " vs " + playerSelection);  
+        } else if (playerSelection == "score") {
+            alert("The scores are " + playerScore + " to " + compScore)
+         } else if (playerSelection == "") {
+             alert("What are you trying to pull?")
+         } else {
+            console.log("Please choose a valid option.")
+        } 
+    }
+
+    function game() {
+        for (; compScore < 5 && playerScore < 5;) {
+            computerPlay();
+            playRound();
+        }
+
+        if (compScore == 5) {
+            alert("Game over. You lost to logic. Final score: " + playerScore + " to " + compScore);
+        } else if (playerScore == 5) {
+            alert("You won! Emotion prevails! Final score: " + playerScore + " to " + compScore);
+        }
+    }
+
 </script>
